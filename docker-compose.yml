@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8081:80"
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=qr_menu
+      - DB_USER=qr_user
+      - DB_PASS=qr_pass
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=qr_menu
+      - MYSQL_USER=qr_user
+      - MYSQL_PASSWORD=qr_pass
+    volumes:
+      - qr_menu_db:/var/lib/mysql
+      - ./app/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  qr_menu_db:
