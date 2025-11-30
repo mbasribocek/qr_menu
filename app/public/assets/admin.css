@@ -27,13 +27,39 @@ body.admin-body {
     font-size: 1.2rem;
     color: #f9fafb;
     margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
     text-decoration: none;
     display: block;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
 }
 
 .admin-sidebar-brand:hover {
     color: #f9fafb;
     text-decoration: none;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-sidebar-logo {
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+    margin-top: -0.5rem; /* Compensate for sidebar top padding */
+}
+
+.admin-sidebar-logo img {
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-sidebar-logo img:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .admin-sidebar-nav {
@@ -322,27 +348,176 @@ body.admin-body {
     color: #047857;
 }
 
-/* Responsive Design */
+/* Mobile Navigation Bar */
 @media (max-width: 768px) {
+    /* Mobile Top Navigation */
+    .mobile-navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: linear-gradient(135deg, #111827, #1f2937) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding: 0.75rem 1rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        z-index: 1060 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .mobile-menu-toggle {
+        background: transparent !important;
+        border: none !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 1.2rem !important;
+        padding: 0.5rem !important;
+        border-radius: 8px !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+    }
+    
+    .mobile-logo {
+        flex: 1 !important;
+        text-align: center !important;
+        margin: 0 1rem !important;
+    }
+    
+    .mobile-logo img {
+        max-height: 35px !important;
+        max-width: 120px !important;
+        object-fit: contain !important;
+        border-radius: 6px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        padding: 4px 8px !important;
+    }
+    
+    .mobile-logo-text {
+        color: #10f2c5 !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        background: rgba(16, 185, 129, 0.1) !important;
+        border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        border-radius: 8px !important;
+        padding: 0.4rem 0.8rem !important;
+        display: inline-block !important;
+    }
+    
+    .mobile-language-switcher {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px !important;
+        padding: 2px !important;
+        display: flex !important;
+    }
+    
+    .mobile-language-switcher .btn {
+        font-size: 0.7rem !important;
+        padding: 4px 8px !important;
+        min-width: 32px !important;
+        border-radius: 8px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        background: transparent !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+        margin: 1px !important;
+    }
+    
+    .mobile-language-switcher .btn:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .mobile-language-switcher .btn.active {
+        background: #10b981 !important;
+        color: #022c22 !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 4px rgba(16, 185, 129, 0.3) !important;
+    }
+    
+    /* Layout adjustments */
+    .admin-layout {
+        padding-top: 65px !important;
+        flex-direction: column !important;
+    }
+    
+    /* Sidebar adjustments */
     .admin-sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
-        padding: 1rem;
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+        position: fixed !important;
+        top: 65px !important;
+        left: 0 !important;
+        width: 280px !important;
+        height: calc(100vh - 65px) !important;
+        background: linear-gradient(135deg, #111827, #1f2937) !important;
+        z-index: 1050 !important;
+        overflow-y: auto !important;
+        padding: 1rem !important;
+    }
+    
+    .admin-sidebar.mobile-sidebar-open {
+        transform: translateX(0) !important;
+    }
+    
+    .mobile-sidebar-overlay {
+        display: none !important;
+        position: fixed !important;
+        top: 65px !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 1040 !important;
+    }
+    
+    .mobile-sidebar-overlay.active {
+        display: block !important;
+    }
+    
+    /* Hide navbar elements that are now in mobile navbar */
+    .admin-sidebar-logo {
+        display: none !important;
+    }
+    
+    .admin-sidebar-brand {
+        display: none !important;
+    }
+    
+    /* Hide desktop language switcher */
+    .language-switcher:not(.mobile-language-switcher) {
+        display: none !important;
     }
     
     .admin-content {
-        margin-left: 0;
-        padding: 1rem;
-    }
-    
-    .admin-layout {
-        flex-direction: column;
+        margin-left: 0 !important;
+        padding: 1rem !important;
     }
     
     .admin-topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1rem !important;
     }
-}
+    
+    .admin-page-title {
+        font-size: 1.2rem !important;
+    }
+    
+            .dashboard-card .card-body {
+    
+                padding: 1.5rem 1.2rem !important;
+    
+            }
+    
+        }
+    
+        
+    
+    

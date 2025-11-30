@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= t('admin.login_title') ?> - QR Menu App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/admin.css" rel="stylesheet">
+    <link href="/assets/admin.css?v=123456" rel="stylesheet">
     <style>
     .language-switcher {
         position: fixed;

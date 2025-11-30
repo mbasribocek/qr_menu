@@ -28,6 +28,7 @@ return [
     'admin.categories' => 'Kategoriler',
     'admin.products' => 'Ürünler',
     'admin.tables' => 'Masalar',
+    'admin.settings' => 'Ayarlar',
     'admin.logout' => 'Çıkış',
     
     'admin.add_category' => 'Yeni Kategori',
@@ -62,5 +63,53 @@ return [
     'admin.photo' => 'Fotoğraf',
     'admin.none' => 'Yok',
     'admin.confirm_delete_product' => 'Bu ürünü silmek istediğinizden emin misiniz?',
+    
+    // Ayarlar
+    'settings.title' => 'Ayarlar',
+    'settings.instagram_section' => 'Instagram Entegrasyonu',
+    'settings.instagram_url' => 'Instagram URL',
+    'settings.instagram_url_help' => 'Instagram profil URL\'nizi girin (örn: https://instagram.com/hesap_adi)',
+    'settings.show_instagram' => 'Menüde Instagram butonunu göster',
+    'settings.show_instagram_help' => 'Aktif olduğunda, menü alt kısmında Instagram butonu görünür',
+    'settings.save' => 'Ayarları Kaydet',
+    'settings.saved_successfully' => 'Ayarlar başarıyla kaydedildi!',
+    'settings.invalid_url' => 'Lütfen geçerli bir URL girin',
+    'settings.load_error' => 'Restoran ayarları yüklenirken hata oluştu',
+    'settings.preview' => 'Önizleme',
+    'settings.preview_help' => 'Instagram butonunun menüde nasıl görüneceğini gösterir:',
+    'settings.instagram_hidden' => 'Instagram butonu şu anda gizli',
+    'settings.help' => 'Yardım',
+    'settings.help_url' => 'Instagram URL',
+    'settings.help_url_desc' => 'https:// ile başlayan tam Instagram profil URL\'nizi girin',
+    'settings.help_visibility' => 'Buton Görünürlüğü',
+    'settings.help_visibility_desc' => 'Instagram butonunu herkese açık menüde göstermek veya gizlemek için kutucuğu işaretleyin',
+    'settings.help_preview' => 'Canlı Önizleme',
+    'settings.help_preview_desc' => 'Instagram butonunuzun müşterilere nasıl görüneceğini tam olarak görebilirsiniz',
+    'settings.columns_missing' => 'Instagram kolonları veritabanında eksik. Otomatik migration çalıştırmak için lütfen bu sayfayı yenileyin.',
+    'settings.database_error' => 'Veritabanı hatası',
+    'settings.migration_required' => 'Veritabanı Güncellemesi Gerekli',
+    'settings.migration_message' => 'Instagram özelliği kolonları veritabanınızda mevcut değil.',
+    'settings.migration_help' => 'Sistem ilk veritabanı erişiminde gerekli kolonları otomatik olarak ekleyecek. Lütfen bu sayfayı yenileyin.',
+    
+    // Logo ayarları
+    'settings.logo_section' => 'Restoran Logosu',
+    'settings.current_logo' => 'Mevcut Logo',
+    'settings.upload_logo' => 'Logo Yükle',
+    'settings.change_logo' => 'Logo Değiştir',
+    'settings.remove_logo' => 'Logoyu Sil',
+    'settings.remove_logo_help' => 'Bu işlem mevcut logoyu kalıcı olarak silecek',
+    'settings.logo_help' => 'Logo resmi yükleyin (JPEG, PNG, GIF, WebP). Maksimum boyut: 5MB. Önerilen boyut: 300x120px veya benzer oran.',
+    'settings.invalid_file_type' => 'Geçersiz dosya türü. Lütfen sadece JPEG, PNG, GIF veya WebP resimleri yükleyin.',
+    'settings.file_too_large' => 'Dosya çok büyük. Maksimum boyut 5MB.',
+    'settings.upload_failed' => 'Logo yükleme başarısız. Lütfen tekrar deneyin.',
+    
+    'menu.follow_instagram' => 'Takip et',
+    
+    // Dashboard açıklamaları
+    'admin.manage_categories_desc' => 'Menü kategorilerini yönet',
+    'admin.manage_products_desc' => 'Menü öğelerini yönet',
+    'admin.manage_tables_desc' => 'Masaları & QR kodlarını yönet',
+    'admin.configure_settings_desc' => 'Restoran ayarlarını yapılandır',
+    'admin.end_session_desc' => 'Oturumunuzu sonlandır',
 ];
 ?>

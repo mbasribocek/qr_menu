@@ -280,7 +280,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= t('admin.products') ?> - QR Menu Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/admin.css" rel="stylesheet">
+    <link href="/assets/admin.css?v=123456" rel="stylesheet">
     <style>
     .language-switcher {
         position: fixed;
@@ -335,8 +335,45 @@ try {
         <?php endforeach; ?>
     </div>
 
+    <!-- Mobile Navigation Bar -->
+    <div class="mobile-navbar d-md-none">
+        <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="mobile-logo"><a href="/admin/dashboard.php" class="mobile-logo-text"><?= t('admin.title') ?></a></div>
+        <div class="mobile-language-switcher">
+            <?php 
+            $supportedLangs = getSupportedLanguages();
+            $currentLang = getCurrentLangCode();
+            foreach ($supportedLangs as $langCode => $langInfo): ?>
+                <a href="<?= buildLanguageUrl($langCode) ?>" class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"><?= strtoupper($langCode) ?></a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="mobile-sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
     <div class="admin-layout">
-        <div class="admin-sidebar">
+        <div class="admin-sidebar" id="mobileSidebar">
+            <!-- Restaurant Logo in Sidebar -->
+            <?php
+            // Load restaurant info for logo
+            try {
+                $pdo = getDb();
+                $stmt = $pdo->prepare("SELECT * FROM restaurants WHERE id = 1 LIMIT 1");
+                $stmt->execute();
+                $restaurant = $stmt->fetch();
+            } catch (Exception $e) {
+                $restaurant = null;
+            }
+            ?>
+            <?php if ($restaurant && !empty($restaurant['logo_path'])): ?>
+                <div class="admin-sidebar-logo text-center mb-3">
+                    <img src="<?= htmlspecialchars($restaurant['logo_path']) ?>" 
+                         alt="<?= htmlspecialchars($restaurant['name'] ?? 'Restaurant Logo') ?>" 
+                         class="img-fluid"
+                         style="max-height: 60px; max-width: 180px; object-fit: contain; border-radius: 8px;"
+                         onerror="this.style.display='none';">
+                </div>
+            <?php endif; ?>
+            
             <a href="/admin/dashboard.php" class="admin-sidebar-brand"><?= t('admin.title') ?></a>
             
             <nav class="admin-sidebar-nav">
@@ -344,6 +381,7 @@ try {
                 <a href="/admin/categories.php"><?= t('admin.categories') ?></a>
                 <a href="/admin/products.php" class="active"><?= t('admin.products') ?></a>
                 <a href="/admin/tables.php"><?= t('admin.tables') ?></a>
+                <a href="/admin/settings.php"><?= t('admin.settings') ?></a>
             </nav>
             
             <div class="admin-sidebar-footer">
@@ -615,3 +653,8 @@ try {
     </div>
 </body>
 </html>
+<script>
+function toggleMobileSidebar(){const a=document.getElementById("mobileSidebar"),b=document.querySelector(".mobile-sidebar-overlay");a.classList.toggle("mobile-sidebar-open"),b.classList.toggle("active")}
+function closeMobileSidebar(){const a=document.getElementById("mobileSidebar"),b=document.querySelector(".mobile-sidebar-overlay");a.classList.remove("mobile-sidebar-open"),b.classList.remove("active")}
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".admin-sidebar-nav a").forEach(a=>{a.addEventListener("click",function(){window.innerWidth<=768&&closeMobileSidebar()})}),window.addEventListener("resize",function(){window.innerWidth>768&&closeMobileSidebar()})});
+</script>

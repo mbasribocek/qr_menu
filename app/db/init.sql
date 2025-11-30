@@ -14,6 +14,9 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS restaurants (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150),
+    logo_path VARCHAR(255) NULL,
+    instagram_url VARCHAR(255) NULL,
+    show_instagram TINYINT(1) NOT NULL DEFAULT 0,
     slug VARCHAR(150) UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

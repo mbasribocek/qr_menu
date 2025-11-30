@@ -28,6 +28,7 @@ return [
     'admin.categories' => 'Categories',
     'admin.products' => 'Products',
     'admin.tables' => 'Tables',
+    'admin.settings' => 'Settings',
     'admin.logout' => 'Logout',
     
     'admin.add_category' => 'Add Category',
@@ -62,5 +63,53 @@ return [
     'admin.photo' => 'Photo',
     'admin.none' => 'None',
     'admin.confirm_delete_product' => 'Are you sure you want to delete this product?',
+    
+    // Settings
+    'settings.title' => 'Settings',
+    'settings.instagram_section' => 'Instagram Integration',
+    'settings.instagram_url' => 'Instagram URL',
+    'settings.instagram_url_help' => 'Enter your Instagram profile URL (e.g., https://instagram.com/your_account)',
+    'settings.show_instagram' => 'Show Instagram button on menu',
+    'settings.show_instagram_help' => 'When enabled, an Instagram button will appear in the menu footer',
+    'settings.save' => 'Save Settings',
+    'settings.saved_successfully' => 'Settings saved successfully!',
+    'settings.invalid_url' => 'Please enter a valid URL',
+    'settings.load_error' => 'Error loading restaurant settings',
+    'settings.preview' => 'Preview',
+    'settings.preview_help' => 'This shows how the Instagram button will appear on your menu:',
+    'settings.instagram_hidden' => 'Instagram button is currently hidden',
+    'settings.help' => 'Help',
+    'settings.help_url' => 'Instagram URL',
+    'settings.help_url_desc' => 'Enter your complete Instagram profile URL starting with https://',
+    'settings.help_visibility' => 'Button Visibility',
+    'settings.help_visibility_desc' => 'Toggle the checkbox to show or hide the Instagram button on your public menu',
+    'settings.help_preview' => 'Live Preview',
+    'settings.help_preview_desc' => 'See exactly how your Instagram button will look to customers',
+    'settings.columns_missing' => 'Instagram columns are missing from database. Please refresh this page to run automatic migration.',
+    'settings.database_error' => 'Database error',
+    'settings.migration_required' => 'Database Update Required',
+    'settings.migration_message' => 'Instagram feature columns are not available in your database.',
+    'settings.migration_help' => 'The system will automatically add the required columns when you first access the database. Please refresh this page.',
+    
+    // Logo settings
+    'settings.logo_section' => 'Restaurant Logo',
+    'settings.current_logo' => 'Current Logo',
+    'settings.upload_logo' => 'Upload Logo',
+    'settings.change_logo' => 'Change Logo',
+    'settings.remove_logo' => 'Remove Logo',
+    'settings.remove_logo_help' => 'This will permanently delete the current logo',
+    'settings.logo_help' => 'Upload a logo image (JPEG, PNG, GIF, WebP). Maximum size: 5MB. Recommended size: 300x120px or similar ratio.',
+    'settings.invalid_file_type' => 'Invalid file type. Please upload JPEG, PNG, GIF, or WebP images only.',
+    'settings.file_too_large' => 'File is too large. Maximum size is 5MB.',
+    'settings.upload_failed' => 'Failed to upload logo. Please try again.',
+    
+    'menu.follow_instagram' => 'Follow us',
+    
+    // Dashboard descriptions
+    'admin.manage_categories_desc' => 'Manage menu categories',
+    'admin.manage_products_desc' => 'Manage menu items',
+    'admin.manage_tables_desc' => 'Manage tables & QR codes',
+    'admin.configure_settings_desc' => 'Configure restaurant settings',
+    'admin.end_session_desc' => 'End your session',
 ];
 ?>

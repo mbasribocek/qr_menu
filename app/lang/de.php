@@ -28,6 +28,7 @@ return [
     'admin.categories' => 'Kategorien',
     'admin.products' => 'Produkte',
     'admin.tables' => 'Tische',
+    'admin.settings' => 'Einstellungen',
     'admin.logout' => 'Abmelden',
     
     'admin.add_category' => 'Kategorie hinzufügen',
@@ -62,5 +63,53 @@ return [
     'admin.photo' => 'Foto',
     'admin.none' => 'Keine',
     'admin.confirm_delete_product' => 'Sind Sie sicher, dass Sie dieses Produkt löschen möchten?',
+    
+    // Einstellungen
+    'settings.title' => 'Einstellungen',
+    'settings.instagram_section' => 'Instagram-Integration',
+    'settings.instagram_url' => 'Instagram-URL',
+    'settings.instagram_url_help' => 'Geben Sie Ihre Instagram-Profil-URL ein (z.B. https://instagram.com/ihr_konto)',
+    'settings.show_instagram' => 'Instagram-Button im Menü anzeigen',
+    'settings.show_instagram_help' => 'Wenn aktiviert, erscheint ein Instagram-Button in der Menü-Fußzeile',
+    'settings.save' => 'Einstellungen speichern',
+    'settings.saved_successfully' => 'Einstellungen erfolgreich gespeichert!',
+    'settings.invalid_url' => 'Bitte geben Sie eine gültige URL ein',
+    'settings.load_error' => 'Fehler beim Laden der Restaurant-Einstellungen',
+    'settings.preview' => 'Vorschau',
+    'settings.preview_help' => 'So wird der Instagram-Button in Ihrem Menü erscheinen:',
+    'settings.instagram_hidden' => 'Instagram-Button ist derzeit ausgeblendet',
+    'settings.help' => 'Hilfe',
+    'settings.help_url' => 'Instagram-URL',
+    'settings.help_url_desc' => 'Geben Sie Ihre vollständige Instagram-Profil-URL ein, die mit https:// beginnt',
+    'settings.help_visibility' => 'Button-Sichtbarkeit',
+    'settings.help_visibility_desc' => 'Aktivieren Sie das Kontrollkästchen, um den Instagram-Button in Ihrem öffentlichen Menü anzuzeigen oder zu verbergen',
+    'settings.help_preview' => 'Live-Vorschau',
+    'settings.help_preview_desc' => 'Sehen Sie genau, wie Ihr Instagram-Button für Kunden aussehen wird',
+    'settings.columns_missing' => 'Instagram-Spalten fehlen in der Datenbank. Bitte aktualisieren Sie diese Seite, um die automatische Migration auszuführen.',
+    'settings.database_error' => 'Datenbankfehler',
+    'settings.migration_required' => 'Datenbank-Update erforderlich',
+    'settings.migration_message' => 'Instagram-Feature-Spalten sind in Ihrer Datenbank nicht verfügbar.',
+    'settings.migration_help' => 'Das System fügt automatisch die erforderlichen Spalten beim ersten Datenbankzugriff hinzu. Bitte aktualisieren Sie diese Seite.',
+    
+    // Logo-Einstellungen
+    'settings.logo_section' => 'Restaurant-Logo',
+    'settings.current_logo' => 'Aktuelles Logo',
+    'settings.upload_logo' => 'Logo hochladen',
+    'settings.change_logo' => 'Logo ändern',
+    'settings.remove_logo' => 'Logo entfernen',
+    'settings.remove_logo_help' => 'Dies löscht das aktuelle Logo dauerhaft',
+    'settings.logo_help' => 'Logo-Bild hochladen (JPEG, PNG, GIF, WebP). Maximale Größe: 5MB. Empfohlene Größe: 300x120px oder ähnliches Verhältnis.',
+    'settings.invalid_file_type' => 'Ungültiger Dateityp. Bitte laden Sie nur JPEG-, PNG-, GIF- oder WebP-Bilder hoch.',
+    'settings.file_too_large' => 'Datei ist zu groß. Maximale Größe beträgt 5MB.',
+    'settings.upload_failed' => 'Logo-Upload fehlgeschlagen. Bitte versuchen Sie es erneut.',
+    
+    'menu.follow_instagram' => 'Folgen Sie uns',
+    
+    // Dashboard-Beschreibungen
+    'admin.manage_categories_desc' => 'Menükategorien verwalten',
+    'admin.manage_products_desc' => 'Menüeinträge verwalten',
+    'admin.manage_tables_desc' => 'Tische & QR-Codes verwalten',
+    'admin.configure_settings_desc' => 'Restaurant-Einstellungen konfigurieren',
+    'admin.end_session_desc' => 'Sitzung beenden',
 ];
 ?>
