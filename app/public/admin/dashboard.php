@@ -225,53 +225,8 @@ requireLogin();
         <?php endforeach; ?>
     </div>
 
-    <!-- Mobile Navigation Bar -->
-    <div class="mobile-navbar d-md-none">
-        <!-- Hamburger Menu Toggle -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <!-- Logo/Brand -->
-        <div class="mobile-logo">
-            <?php
-            // Load restaurant info for mobile logo
-            try {
-                $pdo = getDb();
-                $stmt = $pdo->prepare("SELECT * FROM restaurants WHERE id = 1 LIMIT 1");
-                $stmt->execute();
-                $restaurant = $stmt->fetch();
-            } catch (Exception $e) {
-                $restaurant = null;
-            }
-            ?>
-            <?php if ($restaurant && !empty($restaurant['logo_path'])): ?>
-                <img src="<?= htmlspecialchars($restaurant['logo_path']) ?>" 
-                     alt="<?= htmlspecialchars($restaurant['name'] ?? 'Restaurant Logo') ?>" 
-                     onerror="this.style.display='none';">
-            <?php else: ?>
-                <a href="/admin/dashboard.php" class="mobile-logo-text"><?= t('admin.title') ?></a>
-            <?php endif; ?>
-        </div>
-        
-        <!-- Language Switcher -->
-        <div class="mobile-language-switcher">
-            <?php 
-            $supportedLangs = getSupportedLanguages();
-            $currentLang = getCurrentLangCode();
-            ?>
-            <?php foreach ($supportedLangs as $langCode => $langInfo): ?>
-                <a href="<?= buildLanguageUrl($langCode) ?>" 
-                   class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"
-                   title="<?= htmlspecialchars($langInfo['name']) ?>">
-                    <?= strtoupper($langCode) ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
     <!-- Mobile Sidebar Overlay -->
-    <div class="mobile-sidebar-overlay" onclick="closeMobileSidebar()"></div>
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
 
     <div class="admin-layout">
         <div class="admin-sidebar" id="mobileSidebar">
@@ -327,6 +282,55 @@ requireLogin();
         
         <div class="admin-content">
             <div class="admin-topbar">
+                <div class="admin-topbar-left">
+                    <button class="admin-menu-toggle" onclick="toggleSidebar()">
+                        <span></span>
+                    </button>
+                </div>
+                <div class="admin-topbar-center">
+                    <?php
+                    // Load restaurant info for logo
+                    try {
+                        $pdo = getDb();
+                        $stmt = $pdo->prepare("SELECT * FROM restaurants WHERE id = 1 LIMIT 1");
+                        $stmt->execute();
+                        $restaurant = $stmt->fetch();
+                    } catch (Exception $e) {
+                        $restaurant = null;
+                    }
+                    ?>
+                    <?php if ($restaurant && !empty($restaurant['logo_path'])): ?>
+                        <img src="<?= htmlspecialchars($restaurant['logo_path']) ?>" 
+                             alt="<?= htmlspecialchars($restaurant['name'] ?? 'Restaurant Logo') ?>" 
+                             style="height: 32px; max-width: 120px; object-fit: contain;">
+                    <?php else: ?>
+                        <span class="admin-topbar-logo"><?= t('admin.title') ?></span>
+                    <?php endif; ?>
+                </div>
+                <div class="admin-topbar-right">
+                    <div class="dropdown">
+                        <button class="admin-lang-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <?= strtoupper(getCurrentLangCode()) ?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <?php 
+                            $supportedLangs = getSupportedLanguages();
+                            $currentLang = getCurrentLangCode();
+                            ?>
+                            <?php foreach ($supportedLangs as $langCode => $langInfo): ?>
+                                <li>
+                                    <a class="dropdown-item <?= $currentLang === $langCode ? 'active' : '' ?>" 
+                                       href="<?= buildLanguageUrl($langCode) ?>">
+                                        <?= htmlspecialchars($langInfo['name']) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-page-header">
                 <h1 class="admin-page-title"><?= t('admin.dashboard') ?></h1>
                 <div class="admin-user-info">Welcome, <?= htmlspecialchars($_SESSION['user_email']) ?></div>
             </div>
@@ -385,22 +389,27 @@ requireLogin();
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    // Mobile sidebar toggle functions
-    function toggleMobileSidebar() {
-        const sidebar = document.getElementById('mobileSidebar');
-        const overlay = document.querySelector('.mobile-sidebar-overlay');
+    // Sidebar toggle functions
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.admin-sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggle = document.querySelector('.admin-menu-toggle');
         
-        sidebar.classList.toggle('mobile-sidebar-open');
+        sidebar.classList.toggle('is-open');
         overlay.classList.toggle('active');
+        toggle.classList.toggle('active');
     }
     
-    function closeMobileSidebar() {
-        const sidebar = document.getElementById('mobileSidebar');
-        const overlay = document.querySelector('.mobile-sidebar-overlay');
+    function closeSidebar() {
+        const sidebar = document.querySelector('.admin-sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggle = document.querySelector('.admin-menu-toggle');
         
-        sidebar.classList.remove('mobile-sidebar-open');
+        sidebar.classList.remove('is-open');
         overlay.classList.remove('active');
+        toggle.classList.remove('active');
     }
     
     // Close sidebar when clicking on a menu item (mobile)
@@ -408,16 +417,16 @@ requireLogin();
         const sidebarLinks = document.querySelectorAll('.admin-sidebar-nav a');
         sidebarLinks.forEach(link => {
             link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    closeMobileSidebar();
+                if (window.innerWidth <= 991.98) {
+                    closeSidebar();
                 }
             });
         });
         
         // Close sidebar when resizing to desktop
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileSidebar();
+            if (window.innerWidth > 991.98) {
+                closeSidebar();
             }
         });
     });

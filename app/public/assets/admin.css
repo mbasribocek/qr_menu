@@ -348,175 +348,290 @@ body.admin-body {
     color: #047857;
 }
 
-/* Mobile Navigation Bar */
-@media (max-width: 768px) {
-    /* Mobile Top Navigation */
-    .mobile-navbar {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: linear-gradient(135deg, #111827, #1f2937) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-        padding: 0.75rem 1rem !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        z-index: 1060 !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-    }
-    
-    .mobile-menu-toggle {
-        background: transparent !important;
-        border: none !important;
-        color: rgba(255, 255, 255, 0.8) !important;
-        font-size: 1.2rem !important;
-        padding: 0.5rem !important;
-        border-radius: 8px !important;
-        transition: all 0.2s ease !important;
-        cursor: pointer !important;
-    }
-    
-    .mobile-menu-toggle:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
-    }
-    
-    .mobile-logo {
-        flex: 1 !important;
-        text-align: center !important;
-        margin: 0 1rem !important;
-    }
-    
-    .mobile-logo img {
-        max-height: 35px !important;
-        max-width: 120px !important;
-        object-fit: contain !important;
-        border-radius: 6px !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        padding: 4px 8px !important;
-    }
-    
-    .mobile-logo-text {
-        color: #10f2c5 !important;
-        font-weight: 600 !important;
-        font-size: 1rem !important;
-        text-decoration: none !important;
-        background: rgba(16, 185, 129, 0.1) !important;
-        border: 1px solid rgba(16, 185, 129, 0.2) !important;
-        border-radius: 8px !important;
-        padding: 0.4rem 0.8rem !important;
-        display: inline-block !important;
-    }
-    
-    .mobile-language-switcher {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border-radius: 12px !important;
-        padding: 2px !important;
-        display: flex !important;
-    }
-    
-    .mobile-language-switcher .btn {
-        font-size: 0.7rem !important;
-        padding: 4px 8px !important;
-        min-width: 32px !important;
-        border-radius: 8px !important;
-        color: rgba(255, 255, 255, 0.7) !important;
-        background: transparent !important;
-        border: none !important;
-        transition: all 0.2s ease !important;
-        margin: 1px !important;
-    }
-    
-    .mobile-language-switcher .btn:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: rgba(255, 255, 255, 0.9) !important;
-    }
-    
-    .mobile-language-switcher .btn.active {
-        background: #10b981 !important;
-        color: #022c22 !important;
-        font-weight: 600 !important;
-        box-shadow: 0 1px 4px rgba(16, 185, 129, 0.3) !important;
-    }
-    
-    /* Layout adjustments */
+/* Topbar elements */
+.admin-topbar-left,
+.admin-topbar-center,
+.admin-topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.admin-topbar-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.admin-topbar-right {
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.admin-topbar-logo {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #111827;
+    white-space: nowrap;
+}
+
+/* Hamburger button */
+.admin-menu-toggle {
+    border: none;
+    background: rgba(17, 24, 39, 0.04);
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.admin-menu-toggle:hover {
+    background: rgba(17, 24, 39, 0.08);
+    transform: translateY(-1px);
+}
+
+.admin-menu-toggle span {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: #374151;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-menu-toggle span::before,
+.admin-menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: #374151;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-menu-toggle span::before {
+    top: -6px;
+}
+
+.admin-menu-toggle span::after {
+    top: 6px;
+}
+
+/* Hamburger animation when active */
+.admin-menu-toggle.active {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.admin-menu-toggle.active span {
+    background: transparent;
+}
+
+.admin-menu-toggle.active span::before {
+    transform: rotate(45deg);
+    top: 0;
+    background: #10b981;
+}
+
+.admin-menu-toggle.active span::after {
+    transform: rotate(-45deg);
+    top: 0;
+    background: #10b981;
+}
+
+/* Language button */
+.admin-lang-btn {
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    background: rgba(17, 24, 39, 0.04);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    color: #374151;
+    transition: all 0.2s ease;
+    min-width: 50px;
+}
+
+.admin-lang-btn:hover {
+    background: rgba(17, 24, 39, 0.06);
+    color: #111827;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-lang-btn:focus {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    border-color: #10b981;
+}
+
+/* Language dropdown improvements */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.25rem;
+    min-width: 140px;
+}
+
+.dropdown-item {
+    border-radius: 6px;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(16, 185, 129, 0.08);
+    color: #10b981;
+}
+
+.dropdown-item.active {
+    background: #10b981;
+    color: #fff;
+}
+
+/* Logo styling improvements */
+.admin-topbar-center img {
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.admin-topbar-center img:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobile behavior */
+@media (max-width: 991.98px) {
     .admin-layout {
-        padding-top: 65px !important;
-        flex-direction: column !important;
+        position: relative;
+        background: #f4f3ee;
+        padding-top: 0;
     }
-    
-    /* Sidebar adjustments */
+
     .admin-sidebar {
-        transform: translateX(-100%) !important;
-        transition: transform 0.3s ease !important;
-        position: fixed !important;
-        top: 65px !important;
-        left: 0 !important;
-        width: 280px !important;
-        height: calc(100vh - 65px) !important;
-        background: linear-gradient(135deg, #111827, #1f2937) !important;
-        z-index: 1050 !important;
-        overflow-y: auto !important;
-        padding: 1rem !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
+        z-index: 1040;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    .admin-sidebar.mobile-sidebar-open {
-        transform: translateX(0) !important;
+
+    .admin-sidebar.is-open {
+        transform: translateX(0);
     }
-    
-    .mobile-sidebar-overlay {
-        display: none !important;
-        position: fixed !important;
-        top: 65px !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: rgba(0, 0, 0, 0.5) !important;
-        z-index: 1040 !important;
-    }
-    
-    .mobile-sidebar-overlay.active {
-        display: block !important;
-    }
-    
-    /* Hide navbar elements that are now in mobile navbar */
-    .admin-sidebar-logo {
-        display: none !important;
-    }
-    
-    .admin-sidebar-brand {
-        display: none !important;
-    }
-    
-    /* Hide desktop language switcher */
-    .language-switcher:not(.mobile-language-switcher) {
-        display: none !important;
-    }
-    
+
     .admin-content {
-        margin-left: 0 !important;
-        padding: 1rem !important;
+        padding: 0;
+        margin-left: 0;
+        background: #f4f3ee;
     }
-    
+
     .admin-topbar {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.5rem !important;
-        margin-bottom: 1rem !important;
+        position: sticky;
+        top: 0;
+        z-index: 1030;
+        background: #ffffff;
+        padding: 0.75rem 1rem;
+        margin: 0;
+        border-bottom: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        backdrop-filter: blur(10px);
     }
-    
+
+    .admin-topbar-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .admin-topbar-center {
+        justify-content: center;
+    }
+
+    .admin-topbar-right {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Sidebar overlay for mobile */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1039;
+        backdrop-filter: blur(2px);
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    /* Hide desktop elements in mobile */
+    .admin-sidebar-logo {
+        display: none;
+    }
+
+    .admin-page-header {
+        padding: 1.5rem 1rem 0;
+        background: #f4f3ee;
+        margin: 0 -1rem 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .admin-content > div:not(.admin-topbar):not(.admin-page-header) {
+        padding: 0 1rem 1.5rem;
+    }
+
     .admin-page-title {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+        color: #111827;
     }
-    
-            .dashboard-card .card-body {
-    
-                padding: 1.5rem 1.2rem !important;
-    
-            }
-    
-        }
+
+    .admin-user-info {
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-bottom: 0;
+    }
+
+    .dashboard-card .card-body {
+        padding: 1.5rem 1.2rem;
+    }
+}
+
+/* Desktop: sidebar always visible, topbar acts just like a header */
+@media (min-width: 992px) {
+    .admin-sidebar {
+        transform: translateX(0);
+        position: fixed;
+        top: 0;
+        bottom: auto;
+        height: 100vh;
+        box-shadow: none;
+    }
+
+    .admin-topbar-left .admin-menu-toggle {
+        display: none;
+    }
+
+    .admin-content {
+        margin-left: 260px;
+    }
+}
     
         
     
