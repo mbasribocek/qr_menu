@@ -116,103 +116,11 @@ try {
     <title><?= t('admin.categories') ?> - QR Menu Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/admin.css?v=<?= time() ?>" rel="stylesheet">
-    <style>
-    .language-switcher {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1050;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 25px;
-        padding: 5px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .language-switcher .btn {
-        border-radius: 20px;
-        font-size: 0.85em;
-        padding: 5px 12px;
-        margin: 2px;
-        min-width: 45px;
-        border: none;
-        background: transparent;
-        color: #666;
-        transition: all 0.2s ease;
-    }
-    
-    .language-switcher .btn:hover {
-        background: #f8f9fa;
-        color: #333;
-        transform: translateY(-1px);
-    }
-    
-    .language-switcher .btn.active {
-        background: #145c46;
-        color: white;
-        font-weight: 500;
-    }
-    </style>
-</head>
+    </head>
 <body class="admin-body">
-    <!-- Language Switcher for Desktop -->
-    <div class="language-switcher d-none d-md-block">
-        <?php 
-        $supportedLangs = getSupportedLanguages();
-        $currentLang = getCurrentLangCode();
-        ?>
-        <?php foreach ($supportedLangs as $langCode => $langInfo): ?>
-            <a href="<?= buildLanguageUrl($langCode) ?>" 
-               class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"
-               title="<?= htmlspecialchars($langInfo['name']) ?>">
-                <?= strtoupper($langCode) ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
-
-    <!-- Mobile Navigation Bar -->
-    <div class="mobile-navbar d-md-none">
-        <!-- Hamburger Menu Toggle -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <!-- Logo/Brand -->
-        <div class="mobile-logo">
-            <?php
-            // Load restaurant info for mobile logo
-            try {
-                $pdo = getDb();
-                $stmt = $pdo->prepare("SELECT * FROM restaurants WHERE id = 1 LIMIT 1");
-                $stmt->execute();
-                $mobileRestaurant = $stmt->fetch();
-            } catch (Exception $e) {
-                $mobileRestaurant = null;
-            }
-            ?>
-            <?php if ($mobileRestaurant && !empty($mobileRestaurant['logo_path'])): ?>
-                <img src="<?= htmlspecialchars($mobileRestaurant['logo_path']) ?>" 
-                     alt="<?= htmlspecialchars($mobileRestaurant['name'] ?? 'Restaurant Logo') ?>" 
-                     onerror="this.style.display='none';">
-            <?php else: ?>
-                <a href="/admin/dashboard.php" class="mobile-logo-text"><?= t('admin.title') ?></a>
-            <?php endif; ?>
-        </div>
-        
-        <!-- Language Switcher -->
-        <div class="mobile-language-switcher">
-            <?php foreach ($supportedLangs as $langCode => $langInfo): ?>
-                <a href="<?= buildLanguageUrl($langCode) ?>" 
-                   class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"
-                   title="<?= htmlspecialchars($langInfo['name']) ?>">
-                    <?= strtoupper($langCode) ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
 
     <!-- Mobile Sidebar Overlay -->
-    <div class="mobile-sidebar-overlay" onclick="closeMobileSidebar()"></div>
+    <div class="sidebar-overlay"></div>
 
     <div class="admin-layout">
         <div class="admin-sidebar" id="mobileSidebar">
@@ -268,8 +176,52 @@ try {
         
         <div class="admin-content">
             <div class="admin-topbar">
-                <h1 class="admin-page-title"><?= t('admin.categories') ?></h1>
-                <a href="/admin/dashboard.php" class="btn btn-primary-soft">← <?= t('admin.dashboard') ?></a>
+                <div class="admin-topbar-left">
+                    <button class="admin-menu-toggle">
+                        <span></span>
+                    </button>
+                    <h1 class="admin-page-title d-none d-lg-block"><?= t('admin.categories') ?></h1>
+                </div>
+                <div class="admin-topbar-center">
+                    <?php
+                    // Load restaurant info for logo
+                    try {
+                        $pdo = getDb();
+                        $stmt = $pdo->prepare("SELECT logo_path, name FROM restaurants WHERE id = 1 LIMIT 1");
+                        $stmt->execute();
+                        $restaurant = $stmt->fetch();
+                        if ($restaurant && !empty($restaurant['logo_path'])): ?>
+                            <img src="<?= htmlspecialchars($restaurant['logo_path']) ?>" 
+                                 alt="<?= htmlspecialchars($restaurant['name'] ?? 'Restaurant Logo') ?>" 
+                                 style="height: 32px; max-width: 120px; object-fit: contain;">
+                        <?php else: ?>
+                            <span class="admin-topbar-logo"><?= t('admin.title') ?></span>
+                        <?php endif;
+                    } catch (Exception $e) {
+                        echo '<span class="admin-topbar-logo">' . t('admin.title') . '</span>';
+                    }
+                    ?>
+                </div>
+                <div class="admin-topbar-right">
+                    <div class="dropdown">
+                        <button class="admin-lang-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <?= strtoupper(getCurrentLangCode()) ?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <?php 
+                            $supportedLangs = getSupportedLanguages();
+                            $currentLang = getCurrentLangCode();
+                            foreach ($supportedLangs as $langCode => $langInfo): ?>
+                                <li>
+                                    <a class="dropdown-item <?= $currentLang === $langCode ? 'active' : '' ?>" 
+                                       href="<?= buildLanguageUrl($langCode) ?>">
+                                        <?= htmlspecialchars($langInfo['name']) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <?php if ($error): ?>
@@ -387,42 +339,7 @@ try {
         </div>
     </div>
 
-    <script>
-    // Mobile sidebar toggle functions
-    function toggleMobileSidebar() {
-        const sidebar = document.getElementById('mobileSidebar');
-        const overlay = document.querySelector('.mobile-sidebar-overlay');
-        
-        sidebar.classList.toggle('mobile-sidebar-open');
-        overlay.classList.toggle('active');
-    }
-    
-    function closeMobileSidebar() {
-        const sidebar = document.getElementById('mobileSidebar');
-        const overlay = document.querySelector('.mobile-sidebar-overlay');
-        
-        sidebar.classList.remove('mobile-sidebar-open');
-        overlay.classList.remove('active');
-    }
-    
-    // Close sidebar when clicking on a menu item (mobile)
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebarLinks = document.querySelectorAll('.admin-sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    closeMobileSidebar();
-                }
-            });
-        });
-        
-        // Close sidebar when resizing to desktop
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileSidebar();
-            }
-        });
-    });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin.js?v=<?= time() ?>"></script>
 </body>
 </html>

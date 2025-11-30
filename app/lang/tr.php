@@ -17,6 +17,7 @@ return [
     'menu.no_products' => 'Bu kategoride henüz ürün yok',
     'menu.no_products_desc' => 'Lütfen başka bir kategori deneyin.',
     'menu.digital_menu' => 'Dijital Menü',
+    'menu.all_categories' => 'Tüm Kategoriler',
     
     'admin.title' => 'Yönetim Paneli',
     'admin.login_title' => 'QR Menü Yönetim Paneli',

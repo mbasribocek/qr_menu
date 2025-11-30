@@ -17,6 +17,7 @@ return [
     'menu.no_products' => 'No products in this category yet',
     'menu.no_products_desc' => 'Please try another category.',
     'menu.digital_menu' => 'Digital Menu',
+    'menu.all_categories' => 'All Categories',
     
     'admin.title' => 'Admin Panel',
     'admin.login_title' => 'QR Menu Admin Panel',

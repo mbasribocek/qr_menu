@@ -14,201 +14,7 @@ requireLogin();
     <title><?= t('admin.dashboard') ?> - QR Menu Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/admin.css?v=<?= time() ?>" rel="stylesheet">
-    <style>
-    .language-switcher {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        z-index: 1050;
-        background: rgba(17, 24, 39, 0.95);
-        backdrop-filter: blur(15px);
-        border-radius: 16px;
-        padding: 4px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .language-switcher .btn {
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        padding: 6px 10px;
-        margin: 2px;
-        min-width: 40px;
-        border: none;
-        background: transparent;
-        color: rgba(255, 255, 255, 0.7);
-        transition: all 0.2s ease;
-        line-height: 1.2;
-    }
-    
-    .language-switcher .btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.9);
-        transform: translateY(-1px);
-    }
-    
-    .language-switcher .btn.active {
-        background: #10b981;
-        color: #022c22;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-    }
-    
-    /* Mobile Navigation Bar */
-    @media (max-width: 768px) {
-        /* Hide desktop elements */
-        .language-switcher.d-none.d-md-block {
-            display: none !important;
-        }
-        
-        /* Mobile Top Navigation */
-        .mobile-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #111827, #1f2937);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1060;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .mobile-menu-toggle {
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-        
-        .mobile-menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        
-        .mobile-logo {
-            flex: 1;
-            text-align: center;
-            margin: 0 1rem;
-        }
-        
-        .mobile-logo img {
-            max-height: 35px;
-            max-width: 120px;
-            object-fit: contain;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 8px;
-        }
-        
-        .mobile-logo-text {
-            color: #10f2c5;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 8px;
-            padding: 0.4rem 0.8rem;
-            display: inline-block;
-        }
-        
-        .mobile-language-switcher {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 2px;
-            display: flex;
-        }
-        
-        .mobile-language-switcher .btn {
-            font-size: 0.7rem !important;
-            padding: 4px 8px !important;
-            min-width: 32px !important;
-            border-radius: 8px !important;
-            color: rgba(255, 255, 255, 0.7) !important;
-            background: transparent !important;
-            border: none !important;
-            transition: all 0.2s ease !important;
-            margin: 1px !important;
-        }
-        
-        .mobile-language-switcher .btn:hover {
-            background: rgba(255, 255, 255, 0.1) !important;
-            color: rgba(255, 255, 255, 0.9) !important;
-        }
-        
-        .mobile-language-switcher .btn.active {
-            background: #10b981 !important;
-            color: #022c22 !important;
-            font-weight: 600 !important;
-            box-shadow: 0 1px 4px rgba(16, 185, 129, 0.3) !important;
-        }
-        
-        /* Sidebar adjustments */
-        .admin-layout {
-            padding-top: 65px !important;
-        }
-        
-        .admin-sidebar {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            position: fixed;
-            top: 65px;
-            left: 0;
-            width: 280px;
-            height: calc(100vh - 65px);
-            background: linear-gradient(135deg, #111827, #1f2937) !important;
-            z-index: 1050;
-            overflow-y: auto;
-            padding: 1rem !important;
-        }
-        
-        .admin-sidebar.mobile-sidebar-open {
-            transform: translateX(0);
-        }
-        
-        .mobile-sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 65px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1040;
-        }
-        
-        .mobile-sidebar-overlay.active {
-            display: block;
-        }
-        
-        /* Hide sidebar elements that are now in navbar */
-        .admin-sidebar .d-md-none {
-            display: none !important;
-        }
-        
-        .admin-sidebar-logo {
-            display: none !important;
-        }
-        
-        .admin-sidebar-brand {
-            display: none !important;
-        }
-        
-        .admin-content {
-            margin-left: 0 !important;
-            padding: 1rem !important;
-        }
-    }
-    </style>
-</head>
+    </head>
 <body class="admin-body">
     <!-- Language Switcher for Desktop -->
     <div class="language-switcher d-none d-md-block">
@@ -226,7 +32,7 @@ requireLogin();
     </div>
 
     <!-- Mobile Sidebar Overlay -->
-    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+    <div class="sidebar-overlay"></div>
 
     <div class="admin-layout">
         <div class="admin-sidebar" id="mobileSidebar">
@@ -283,7 +89,7 @@ requireLogin();
         <div class="admin-content">
             <div class="admin-topbar">
                 <div class="admin-topbar-left">
-                    <button class="admin-menu-toggle" onclick="toggleSidebar()">
+                    <button class="admin-menu-toggle">
                         <span></span>
                     </button>
                 </div>
@@ -390,46 +196,6 @@ requireLogin();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    // Sidebar toggle functions
-    function toggleSidebar() {
-        const sidebar = document.querySelector('.admin-sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-        const toggle = document.querySelector('.admin-menu-toggle');
-        
-        sidebar.classList.toggle('is-open');
-        overlay.classList.toggle('active');
-        toggle.classList.toggle('active');
-    }
-    
-    function closeSidebar() {
-        const sidebar = document.querySelector('.admin-sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-        const toggle = document.querySelector('.admin-menu-toggle');
-        
-        sidebar.classList.remove('is-open');
-        overlay.classList.remove('active');
-        toggle.classList.remove('active');
-    }
-    
-    // Close sidebar when clicking on a menu item (mobile)
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebarLinks = document.querySelectorAll('.admin-sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 991.98) {
-                    closeSidebar();
-                }
-            });
-        });
-        
-        // Close sidebar when resizing to desktop
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 991.98) {
-                closeSidebar();
-            }
-        });
-    });
-    </script>
+    <script src="/assets/admin.js?v=<?= time() ?>"></script>
 </body>
 </html>

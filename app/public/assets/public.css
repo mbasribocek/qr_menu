@@ -1,0 +1,438 @@
+/* Public facing styles for QR Menu */
+body {
+    background: #f6f3ee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.primary-green {
+    color: #145c46;
+}
+
+/* On mobile, add padding to body to prevent content from being hidden by the fixed top bar */
+@media (max-width: 991.98px) {
+    body {
+        padding-top: 60px;
+    }
+}
+
+
+/* --- Styles from menu.php --- */
+
+.bg-primary-green {
+    background-color: #145c46;
+}
+
+.border-primary-green {
+    border-color: #145c46;
+}
+
+.search-wrapper input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.search-wrapper input:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.category-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .15) !important;
+}
+
+.product-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .12) !important;
+}
+
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+.category-card img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.category-card:hover img {
+    transform: scale(1.05);
+}
+
+.badge-custom {
+    background: #f1f5f3;
+    color: #145c46;
+    border: 1px solid #c9d7cf;
+    font-weight: 500;
+}
+
+.menu-underline {
+    width: 80px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #145c46, #3bb273);
+    margin: 0 auto;
+}
+
+.category-card-active .card {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border: 2px solid #145c46;
+    transform: translateY(-2px);
+}
+
+/* Restaurant Logo Styling */
+.restaurant-logo-container {
+    margin-top: 1rem;
+    margin-bottom: 2.5rem !important;
+    padding: 0 1rem;
+}
+
+.restaurant-logo {
+    max-height: 120px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 16px;
+    box-shadow: 0 8px 25px rgba(20, 92, 70, 0.15);
+    border: 1px solid rgba(20, 92, 70, 0.1);
+    transition: all 0.3s ease;
+}
+
+.restaurant-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(20, 92, 70, 0.2);
+}
+
+/* Back Button Styling */
+.back-button-container {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.back-button {
+    background: rgba(20, 92, 70, 0.1);
+    border: 1px solid rgba(20, 92, 70, 0.3);
+    color: #145c46;
+    font-weight: 500;
+    border-radius: 25px;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(20, 92, 70, 0.1);
+}
+
+.back-button:hover {
+    background: #145c46;
+    color: white;
+    border-color: #145c46;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(20, 92, 70, 0.2);
+    text-decoration: none;
+}
+
+.back-button i {
+    transition: transform 0.2s ease;
+}
+
+.back-button:hover i {
+    transform: translateX(-2px);
+}
+
+/* --- Styles from header.php --- */
+
+/* Public-facing Topbar */
+.public-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: #ffffff;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.public-topbar-left, .public-topbar-center, .public-topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.public-topbar-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.public-topbar-right {
+    justify-content: flex-end;
+}
+
+.public-logo {
+    height: 32px;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+/* Hamburger button */
+.menu-toggle {
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-toggle span {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: #374151;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: #374151;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-toggle span::before {
+    top: -6px;
+}
+
+.menu-toggle span::after {
+    top: 6px;
+}
+
+.menu-toggle.active span {
+    background: transparent;
+}
+
+.menu-toggle.active span::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.menu-toggle.active span::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* Public Sidebar */
+.public-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    z-index: 1040;
+    background: #111827;
+    color: #e5e7eb;
+    padding: 1.5rem 1rem;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.public-sidebar.is-open {
+    transform: translateX(0);
+}
+
+.public-sidebar-nav a {
+    display: block;
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+    transition: all 0.2s ease;
+}
+
+.public-sidebar-nav a:hover {
+    background: rgba(16, 185, 129, 0.12);
+    color: #10f2c5;
+}
+
+.public-sidebar-nav a.active {
+    background: #10b981;
+    color: #022c22;
+    font-weight: 500;
+}
+
+/* Sidebar overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1039;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Language Switcher */
+.language-switcher .btn {
+    border-radius: 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+}
+
+.language-switcher .btn.active {
+    background: #10b981;
+    color: #fff;
+    border-color: #10b981;
+}
+
+/* --- Mobile-specific Optimizations --- */
+
+@media (max-width: 991.98px) {
+    .public-topbar {
+        display: flex;
+    }
+    .public-sidebar {
+        display: flex;
+    }
+    .menu-toggle {
+        display: inline-flex;
+    }
+}
+
+@media (min-width: 992px) {
+    .public-topbar, .public-sidebar, .sidebar-overlay, .menu-toggle {
+        display: none;
+    }
+}
+
+/* Mobile Logo Optimizations from menu.php styles */
+@media (max-width: 768px) {
+    .restaurant-logo-container {
+        display: none; /* Hide the desktop logo on mobile, as it's in the top bar now */
+    }
+}
+
+/* Mobile Back Button Optimizations from menu.php styles */
+@media (max-width: 768px) {
+    .back-button-container {
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.75rem;
+    }
+    
+    .back-button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        width: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .back-button-container {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+    }
+    
+    .back-button {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        border-radius: 18px;
+        justify-content: center;
+        min-width: 140px;
+    }
+    
+    .back-button i {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- UI/UX Improvements --- */
+body {
+    background-color: #f7f3ef;
+    background-image:
+        linear-gradient(to right, rgba(216, 211, 201, 0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(216, 211, 201, 0.5) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+@media (min-width: 992px) {
+    .container {
+        padding-top: 3rem;
+    }
+}
+
+.search-wrapper {
+    margin-bottom: 3rem;
+}
+.menu-title-section {
+    margin-bottom: 3rem;
+}
+
+.category-item, .product-item {
+    /* styles for the items */
+}
+
+/* 2-column grid on mobile */
+@media (max-width: 767.98px) {
+    .category-item, .product-item {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .category-card .card-body, .product-card .card-body {
+        padding: 0.75rem;
+    }
+    .category-card .card-title, .product-card .card-title {
+        font-size: 0.9rem;
+    }
+    .category-card .card-img-top {
+        height: 120px;
+    }
+    .product-card .card-img-top, .product-card .d-flex {
+        height: 140px;
+    }
+}
+
+/* 5-column grid for desktop */
+@media (min-width: 1200px) {
+    .col-xl-2-4 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}

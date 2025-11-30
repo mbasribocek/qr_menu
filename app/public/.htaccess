@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# /admin URL'ini login paneline yönlendir
+RewriteRule ^admin/?$ /admin/login.php [R=301,L]
+
+# Diğer yönlendirmeler (isteğe bağlı)
+# Eğer dosya veya dizin yoksa 404 yerine menü sayfasına yönlendir
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/admin/
+RewriteRule ^.*$ /menu.php [L]

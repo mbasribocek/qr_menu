@@ -130,220 +130,8 @@ if (!$categoryId) {
 include __DIR__ . '/../app/views/header.php';
 ?>
 
-<style>
-/* Custom Styling for Modern Light Theme */
-body {
-    background: #f6f3ee;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.primary-green {
-    color: #145c46;
-}
-
-.bg-primary-green {
-    background-color: #145c46;
-}
-
-.border-primary-green {
-    border-color: #145c46;
-}
-
-.search-wrapper input {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.search-wrapper input:focus {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.category-card {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .15) !important;
-}
-
-.product-card {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .12) !important;
-}
-
-.rounded-4 {
-    border-radius: 1rem !important;
-}
-
-.category-card img {
-    transition: transform 0.3s ease-in-out;
-}
-
-.category-card:hover img {
-    transform: scale(1.05);
-}
-
-.badge-custom {
-    background: #f1f5f3;
-    color: #145c46;
-    border: 1px solid #c9d7cf;
-    font-weight: 500;
-}
-
-.menu-underline {
-    width: 80px;
-    height: 4px;
-    border-radius: 999px;
-    background: linear-gradient(to right, #145c46, #3bb273);
-    margin: 0 auto;
-}
-
-.category-card-active .card {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    border: 2px solid #145c46;
-    transform: translateY(-2px);
-}
-
-/* Restaurant Logo Styling */
-.restaurant-logo-container {
-    margin-top: 1rem;
-    margin-bottom: 2.5rem !important;
-    padding: 0 1rem;
-}
-
-.restaurant-logo {
-    max-height: 120px;
-    max-width: 100%;
-    object-fit: contain;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 16px;
-    box-shadow: 0 8px 25px rgba(20, 92, 70, 0.15);
-    border: 1px solid rgba(20, 92, 70, 0.1);
-    transition: all 0.3s ease;
-}
-
-.restaurant-logo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(20, 92, 70, 0.2);
-}
-
-/* Mobile Logo Optimizations */
-@media (max-width: 768px) {
-    .restaurant-logo-container {
-        margin-top: 0.5rem;
-        margin-bottom: 2rem !important;
-        padding: 0 0.75rem;
-    }
-    
-    .restaurant-logo {
-        max-height: 100px;
-        padding: 12px;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(20, 92, 70, 0.12);
-    }
-}
-
-@media (max-width: 576px) {
-    .restaurant-logo-container {
-        margin-top: 0;
-        margin-bottom: 1.5rem !important;
-        padding: 0 0.5rem;
-    }
-    
-    .restaurant-logo {
-        max-height: 80px;
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(20, 92, 70, 0.1);
-    }
-}
-
-/* Back Button Styling */
-.back-button-container {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-}
-
-.back-button {
-    background: rgba(20, 92, 70, 0.1);
-    border: 1px solid rgba(20, 92, 70, 0.3);
-    color: #145c46;
-    font-weight: 500;
-    border-radius: 25px;
-    padding: 12px 20px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(20, 92, 70, 0.1);
-}
-
-.back-button:hover {
-    background: #145c46;
-    color: white;
-    border-color: #145c46;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(20, 92, 70, 0.2);
-    text-decoration: none;
-}
-
-.back-button i {
-    transition: transform 0.2s ease;
-}
-
-.back-button:hover i {
-    transform: translateX(-2px);
-}
-
-/* Mobile Back Button Optimizations */
-@media (max-width: 768px) {
-    .back-button-container {
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
-        padding: 0 0.75rem;
-    }
-    
-    .back-button {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        border-radius: 20px;
-        width: auto;
-    }
-}
-
-@media (max-width: 576px) {
-    .back-button-container {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        padding: 0 0.5rem;
-    }
-    
-    .back-button {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-        border-radius: 18px;
-        justify-content: center;
-        min-width: 140px;
-    }
-    
-    .back-button i {
-        font-size: 0.8rem;
-    }
-}
-</style>
-
 <!-- Main Content Container with custom background -->
-<div style="background: #f6f3ee; min-height: 100vh; padding-top: 2rem;">
+<div>
     <div class="container">
         
         <!-- Restaurant Logo -->
@@ -390,7 +178,7 @@ body {
                 <!-- Category Cards Section -->
                 <div class="row g-4 mb-5">
                     <?php foreach ($categoriesData as $categoryDataItem): ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 category-item" data-name="<?= htmlspecialchars(strtolower(getLocalizedCategoryName($categoryDataItem['category']))) ?>">
+                        <div class="col-6 col-md-4 col-lg-3 col-xl-2-4 category-item" data-name="<?= htmlspecialchars(strtolower(getLocalizedCategoryName($categoryDataItem['category']))) ?>">
                             <a href="/menu.php?category_id=<?= (int)$categoryDataItem['category']['id'] ?>" class="text-decoration-none text-dark">
                                 <div class="card border-0 shadow-sm rounded-4 h-100 category-card" style="overflow: hidden;">
                                     <?php if (!empty($categoryDataItem['coverImage'])): ?>
@@ -476,7 +264,7 @@ body {
                     <!-- Products Grid -->
                     <div class="row g-4 product-grid mb-5">
                         <?php foreach ($currentCategoryProducts as $product): ?>
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 product-item" data-name="<?= htmlspecialchars(strtolower(getLocalizedProductName($product))) ?>" data-description="<?= htmlspecialchars(strtolower(getLocalizedProductDescription($product))) ?>">
+                            <div class="col-6 col-md-4 col-lg-3 product-item" data-name="<?= htmlspecialchars(strtolower(getLocalizedProductName($product))) ?>" data-description="<?= htmlspecialchars(strtolower(getLocalizedProductDescription($product))) ?>">
                                 <div class="card h-100 border-0 shadow-sm rounded-4 product-card">
                                     <?php if (!empty($product['image'])): ?>
                                         <img src="<?= htmlspecialchars($product['image']) ?>" 
@@ -547,52 +335,50 @@ body {
 <!-- Search JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Category search functionality (category list mode)
-    const categorySearch = document.getElementById('categorySearch');
-    if (categorySearch) {
-        categorySearch.addEventListener('keyup', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-            const categoryItems = document.querySelectorAll('.category-item');
-            
+    // --- Sidebar Population Script ---
+    const sidebarNav = document.querySelector('.public-sidebar-nav');
+    if (sidebarNav) {
+        // Clear any existing items
+        sidebarNav.innerHTML = '';
+
+        // Add a "Home" or "All Categories" link
+        const homeLink = document.createElement('a');
+        homeLink.href = '/menu.php';
+        homeLink.textContent = '<?= t('menu.all_categories') ?>';
+        if (!<?= isset($_GET['category_id']) ? 'true' : 'false' ?>) {
+            homeLink.classList.add('active');
+        }
+        sidebarNav.appendChild(homeLink);
+
+        // Add a divider
+        const divider = document.createElement('hr');
+        divider.style.borderColor = 'rgba(255,255,255,0.1)';
+        sidebarNav.appendChild(divider);
+
+        // Populate with categories from the page
+        const categoryItems = document.querySelectorAll('.category-item');
+        
+        if (categoryItems.length > 0) {
             categoryItems.forEach(function(item) {
-                const categoryName = item.getAttribute('data-name') || '';
-                const isMatch = categoryName.includes(searchTerm);
+                const link = item.querySelector('a');
+                const titleEl = item.querySelector('.card-title');
                 
-                if (searchTerm === '' || isMatch) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+                if(link && titleEl) {
+                    const newLink = document.createElement('a');
+                    newLink.href = link.href;
+                    newLink.textContent = titleEl.textContent.trim();
+
+                    // Check if this category is the currently active one
+                    const urlParams = new URLSearchParams(new URL(link.href).search);
+                    const catId = urlParams.get('category_id');
+                    if (catId && catId === '<?= $categoryId ?? "null" ?>') {
+                        newLink.classList.add('active');
+                    }
+
+                    sidebarNav.appendChild(newLink);
                 }
             });
-        });
-    }
-    
-    // Product search functionality (category detail mode)
-    const productSearch = document.getElementById('productSearch');
-    if (productSearch) {
-        productSearch.addEventListener('keyup', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-            const productItems = document.querySelectorAll('.product-item');
-            
-            productItems.forEach(function(item) {
-                const productName = item.getAttribute('data-name') || '';
-                const productDescription = item.getAttribute('data-description') || '';
-                
-                const isMatch = productName.includes(searchTerm) || productDescription.includes(searchTerm);
-                
-                if (searchTerm === '' || isMatch) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    }
-    
-    // Smooth scrolling for category pills
-    const categoryPills = document.querySelector('.category-pills');
-    if (categoryPills) {
-        categoryPills.style.scrollBehavior = 'smooth';
+        }
     }
 });
 </script>

@@ -155,74 +155,11 @@ try {
     <title><?= t('settings.title') ?> - QR Menu Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/admin.css?v=123456" rel="stylesheet">
-    <style>
-    .language-switcher {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1050;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 25px;
-        padding: 5px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .language-switcher .btn {
-        border-radius: 20px;
-        font-size: 0.85em;
-        padding: 5px 12px;
-        margin: 2px;
-        min-width: 45px;
-        border: none;
-        background: transparent;
-        color: #666;
-        transition: all 0.2s ease;
-    }
-    
-    .language-switcher .btn:hover {
-        background: #f8f9fa;
-        color: #333;
-        transform: translateY(-1px);
-    }
-    
-    .language-switcher .btn.active {
-        background: #145c46;
-        color: white;
-        font-weight: 500;
-    }
-    </style>
-</head>
+    </head>
 <body class="admin-body">
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <?php 
-        $supportedLangs = getSupportedLanguages();
-        $currentLang = getCurrentLangCode();
-        ?>
-        <?php foreach ($supportedLangs as $langCode => $langInfo): ?>
-            <a href="<?= buildLanguageUrl($langCode) ?>" 
-               class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"
-               title="<?= htmlspecialchars($langInfo['name']) ?>">
-                <?= strtoupper($langCode) ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
 
-    <!-- Mobile Navigation Bar -->
-    <div class="mobile-navbar d-md-none">
-        <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()"><i class="fas fa-bars"></i></button>
-        <div class="mobile-logo"><a href="/admin/dashboard.php" class="mobile-logo-text"><?= t('admin.title') ?></a></div>
-        <div class="mobile-language-switcher">
-            <?php 
-            $supportedLangs = getSupportedLanguages();
-            $currentLang = getCurrentLangCode();
-            foreach ($supportedLangs as $langCode => $langInfo): ?>
-                <a href="<?= buildLanguageUrl($langCode) ?>" class="btn btn-sm <?= $currentLang === $langCode ? 'active' : '' ?>"><?= strtoupper($langCode) ?></a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <div class="mobile-sidebar-overlay" onclick="closeMobileSidebar()"></div>
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
 
     <div class="admin-layout">
         <div class="admin-sidebar" id="mobileSidebar">
@@ -265,8 +202,52 @@ try {
         
         <div class="admin-content">
             <div class="admin-topbar">
-                <h1 class="admin-page-title"><?= t('settings.title') ?></h1>
-                <div class="admin-user-info">Welcome, <?= htmlspecialchars($_SESSION['user_email']) ?></div>
+                <div class="admin-topbar-left">
+                    <button class="admin-menu-toggle">
+                        <span></span>
+                    </button>
+                    <h1 class="admin-page-title d-none d-lg-block"><?= t('settings.title') ?></h1>
+                </div>
+                <div class="admin-topbar-center">
+                    <?php
+                    // Load restaurant info for logo
+                    try {
+                        $pdo = getDb();
+                        $stmt = $pdo->prepare("SELECT logo_path, name FROM restaurants WHERE id = 1 LIMIT 1");
+                        $stmt->execute();
+                        $restaurant = $stmt->fetch();
+                        if ($restaurant && !empty($restaurant['logo_path'])): ?>
+                            <img src="<?= htmlspecialchars($restaurant['logo_path']) ?>" 
+                                 alt="<?= htmlspecialchars($restaurant['name'] ?? 'Restaurant Logo') ?>" 
+                                 style="height: 32px; max-width: 120px; object-fit: contain;">
+                        <?php else: ?>
+                            <span class="admin-topbar-logo"><?= t('admin.title') ?></span>
+                        <?php endif;
+                    } catch (Exception $e) {
+                        echo '<span class="admin-topbar-logo">' . t('admin.title') . '</span>';
+                    }
+                    ?>
+                </div>
+                <div class="admin-topbar-right">
+                    <div class="dropdown">
+                        <button class="admin-lang-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <?= strtoupper(getCurrentLangCode()) ?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <?php 
+                            $supportedLangs = getSupportedLanguages();
+                            $currentLang = getCurrentLangCode();
+                            foreach ($supportedLangs as $langCode => $langInfo): ?>
+                                <li>
+                                    <a class="dropdown-item <?= $currentLang === $langCode ? 'active' : '' ?>" 
+                                       href="<?= buildLanguageUrl($langCode) ?>">
+                                        <?= htmlspecialchars($langInfo['name']) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
             <?php if ($success): ?>
@@ -443,10 +424,6 @@ try {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin.js?v=<?= time() ?>"></script>
 </body>
 </html>
-<script>
-function toggleMobileSidebar(){const a=document.getElementById("mobileSidebar"),b=document.querySelector(".mobile-sidebar-overlay");a.classList.toggle("mobile-sidebar-open"),b.classList.toggle("active")}
-function closeMobileSidebar(){const a=document.getElementById("mobileSidebar"),b=document.querySelector(".mobile-sidebar-overlay");a.classList.remove("mobile-sidebar-open"),b.classList.remove("active")}
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".admin-sidebar-nav a").forEach(a=>{a.addEventListener("click",function(){window.innerWidth<=768&&closeMobileSidebar()})}),window.addEventListener("resize",function(){window.innerWidth>768&&closeMobileSidebar()})});
-</script>
